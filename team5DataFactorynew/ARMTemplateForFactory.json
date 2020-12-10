@@ -200,19 +200,19 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipelineForthCoffeeFilIRC')]",
+			"name": "[concat(parameters('factoryName'), '/FourthCoffeeCopyTablesIR')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "yan_dal",
+						"name": "Copy_28a",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
-							"retryIntervalInSeconds": 35,
+							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
 						},
@@ -255,26 +255,25 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_oc4",
+								"referenceName": "SourceDataset_28a",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_oc4",
+								"referenceName": "DestinationDataset_28a",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					}
 				],
-				"annotations": [],
-				"lastPublishTime": "2020-12-10T07:28:27Z"
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_oc4')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_oc4')]"
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_28a')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_28a')]"
 			]
 		},
 		{
@@ -732,6 +731,34 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_28a')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageteam5",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Fourth Coffee",
+						"container": "datalakecontainer"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageteam5')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_8pw')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1089,6 +1116,46 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageteam5')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_28a')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FileServerFourthCoffee",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"folderPath": "Rentals"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ActorID",
+						"type": "String"
+					},
+					{
+						"name": "ActorName",
+						"type": "String"
+					},
+					{
+						"name": "Gender",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FileServerFourthCoffee')]"
 			]
 		},
 		{
