@@ -803,7 +803,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_new_name",
+						"name": "yan_dal",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
