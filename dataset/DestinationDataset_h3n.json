@@ -22,7 +22,7 @@
 				"folderPath": "Southridge/SalesTable",
 				"container": "datalakecontainer"
 			},
-			"columnDelimiter": "|",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
