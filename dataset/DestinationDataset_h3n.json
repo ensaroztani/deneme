@@ -1,0 +1,32 @@
+{
+	"name": "DestinationDataset_h3n",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageteam5",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_fileName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().cw_fileName",
+					"type": "Expression"
+				},
+				"folderPath": "Southridge/SalesTable",
+				"container": "datalakecontainer"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
