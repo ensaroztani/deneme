@@ -12,12 +12,16 @@
 					"name": "SouthridgeOrders"
 				},
 				{
+					"dataset": {
+						"referenceName": "OrderDetails",
+						"type": "DatasetReference"
+					},
 					"name": "SouthridgeOrderDetails"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
-			"script": "source(output(\n\t\t{OrderID|CustomerID|OrderDate|ShipDate|TotalCost|CreatedDate|UpdatedDate} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeOrders\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeOrderDetails"
+			"script": "source(output(\n\t\t{OrderID|CustomerID|OrderDate|ShipDate|TotalCost|CreatedDate|UpdatedDate} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeOrders\nsource(output(\n\t\t{OrderDetailID|OrderID|MovieID|Quantity|UnitCost|LineNumber|CreatedDate|UpdatedDate} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeOrderDetails"
 		}
 	}
 }
