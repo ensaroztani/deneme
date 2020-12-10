@@ -29,6 +29,90 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_dmr')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MoviesCosmosDb",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CosmosDbSqlApiCollection",
+				"schema": {
+					"type": "object",
+					"properties": {
+						"actors": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"availabilityDate": {
+							"type": "string"
+						},
+						"genre": {
+							"type": "string"
+						},
+						"rating": {
+							"type": "string"
+						},
+						"releaseYear": {
+							"type": "integer"
+						},
+						"runtime": {
+							"type": "integer"
+						},
+						"streamingAvailabilityDate": {
+							"type": "string"
+						},
+						"tier": {
+							"type": "integer"
+						},
+						"title": {
+							"type": "string"
+						}
+					}
+				},
+				"typeProperties": {
+					"collectionName": "movies"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_h3n')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_table": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": {
+						"value": "@dataset().cw_table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SourceDataset_h6d')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -437,13 +521,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DataTransferMoviesCosmosDb')]",
+			"name": "[concat(parameters('factoryName'), '/SouthridgeCopyTablesCosmosDb')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_sau",
+						"name": "Copy_dmr",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -460,7 +544,7 @@
 							},
 							{
 								"name": "Destination",
-								"value": "datalakecontainer/MoviesCosmosDb/"
+								"value": "datalakecontainer/Southridge/MoviesCosmosDb/"
 							}
 						],
 						"typeProperties": {
@@ -489,7 +573,8 @@
 											"path": "$['actors'][0]['name']"
 										},
 										"sink": {
-											"ordinal": 1
+											"name": "name",
+											"type": "String"
 										}
 									},
 									{
@@ -497,7 +582,8 @@
 											"path": "$['availabilityDate']"
 										},
 										"sink": {
-											"ordinal": 2
+											"name": "availabilityDate",
+											"type": "String"
 										}
 									},
 									{
@@ -505,7 +591,8 @@
 											"path": "$['genre']"
 										},
 										"sink": {
-											"ordinal": 3
+											"name": "genre",
+											"type": "String"
 										}
 									},
 									{
@@ -513,7 +600,8 @@
 											"path": "$['rating']"
 										},
 										"sink": {
-											"ordinal": 4
+											"name": "rating",
+											"type": "String"
 										}
 									},
 									{
@@ -521,7 +609,8 @@
 											"path": "$['releaseYear']"
 										},
 										"sink": {
-											"ordinal": 5
+											"name": "releaseYear",
+											"type": "Int32"
 										}
 									},
 									{
@@ -529,7 +618,8 @@
 											"path": "$['runtime']"
 										},
 										"sink": {
-											"ordinal": 6
+											"name": "runtime",
+											"type": "Int32"
 										}
 									},
 									{
@@ -537,7 +627,8 @@
 											"path": "$['streamingAvailabilityDate']"
 										},
 										"sink": {
-											"ordinal": 7
+											"name": "streamingAvailabilityDate",
+											"type": "String"
 										}
 									},
 									{
@@ -545,7 +636,8 @@
 											"path": "$['tier']"
 										},
 										"sink": {
-											"ordinal": 8
+											"name": "tier",
+											"type": "Int32"
 										}
 									},
 									{
@@ -553,7 +645,8 @@
 											"path": "$['title']"
 										},
 										"sink": {
-											"ordinal": 9
+											"name": "title",
+											"type": "String"
 										}
 									},
 									{
@@ -561,7 +654,8 @@
 											"path": "$['id']"
 										},
 										"sink": {
-											"ordinal": 10
+											"name": "id",
+											"type": "String"
 										}
 									},
 									{
@@ -569,7 +663,8 @@
 											"path": "$['_rid']"
 										},
 										"sink": {
-											"ordinal": 11
+											"name": "_rid",
+											"type": "String"
 										}
 									},
 									{
@@ -577,7 +672,8 @@
 											"path": "$['_self']"
 										},
 										"sink": {
-											"ordinal": 12
+											"name": "_self",
+											"type": "String"
 										}
 									},
 									{
@@ -585,7 +681,8 @@
 											"path": "$['_etag']"
 										},
 										"sink": {
-											"ordinal": 13
+											"name": "_etag",
+											"type": "String"
 										}
 									},
 									{
@@ -593,7 +690,8 @@
 											"path": "$['_attachments']"
 										},
 										"sink": {
-											"ordinal": 14
+											"name": "_attachments",
+											"type": "String"
 										}
 									},
 									{
@@ -601,33 +699,34 @@
 											"path": "$['_ts']"
 										},
 										"sink": {
-											"ordinal": 15
+											"name": "_ts",
+											"type": "Int32"
 										}
 									}
-								]
+								],
+								"collectionReference": ""
 							}
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_sau",
+								"referenceName": "SourceDataset_dmr",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_sau",
+								"referenceName": "DestinationDataset_dmr",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					}
 				],
-				"annotations": [],
-				"lastPublishTime": "2020-12-09T11:33:53Z"
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_sau')]"
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_dmr')]"
 			]
 		},
 		{
@@ -751,7 +850,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_h3n')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SouthridgeCopyTablesStreaming')]",
