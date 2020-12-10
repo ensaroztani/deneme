@@ -12,9 +12,17 @@
 					"name": "SouthridgeOrders"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "denemesonuc",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [],
-			"script": "source(output(\n\t\t{OrderID|CustomerID|OrderDate|ShipDate|TotalCost|CreatedDate|UpdatedDate} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeOrders"
+			"script": "source(output(\n\t\t{OrderID|CustomerID|OrderDate|ShipDate|TotalCost|CreatedDate|UpdatedDate} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeOrders\nSouthridgeOrders sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
