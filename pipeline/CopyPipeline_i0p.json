@@ -1,0 +1,143 @@
+{
+	"name": "CopyPipeline_i0p",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_i0p",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_i0p",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.schema}.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "test//@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_i0p",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_schema": "@item().source.schema",
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_i0p",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "Addresses"
+						},
+						"destination": {
+							"fileName": "dboAddresses.csv"
+						}
+					},
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "Customers"
+						},
+						"destination": {
+							"fileName": "dboCustomers.csv"
+						}
+					},
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "OrderDetails"
+						},
+						"destination": {
+							"fileName": "dboOrderDetails.csv"
+						}
+					},
+					{
+						"source": {
+							"schema": "dbo",
+							"table": "Orders"
+						},
+						"destination": {
+							"fileName": "dboOrders.csv"
+						}
+					},
+					{
+						"source": {
+							"schema": "Hidden",
+							"table": "Orders"
+						},
+						"destination": {
+							"fileName": "HiddenOrders.csv"
+						}
+					},
+					{
+						"source": {
+							"schema": "Hidden",
+							"table": "OrderUpdates"
+						},
+						"destination": {
+							"fileName": "HiddenOrderUpdates.csv"
+						}
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
