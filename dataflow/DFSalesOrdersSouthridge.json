@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "DFSalesOrdersSouthridge",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
