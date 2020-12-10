@@ -1,0 +1,22 @@
+{
+	"name": "DestinationDataset_z5k",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageteam5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "datalakecontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

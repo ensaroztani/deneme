@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_oc4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageteam5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Fourth Coffee",
+				"container": "datalakecontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_sau",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageteam5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "MoviesCosmosDb",
+				"container": "datalakecontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
