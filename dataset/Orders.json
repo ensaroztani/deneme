@@ -1,0 +1,29 @@
+{
+	"name": "Orders",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dboOrders.csv",
+				"folderPath": "Southridge/SalesTable",
+				"fileSystem": "datalakecontainer"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "OrderID|CustomerID|OrderDate|ShipDate|TotalCost|CreatedDate|UpdatedDate",
+				"type": "String"
+			}
+		]
+	}
+}
