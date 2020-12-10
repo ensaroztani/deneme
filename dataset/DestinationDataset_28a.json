@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_28a",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageteam5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Fourth Coffee",
+				"container": "datalakecontainer"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
