@@ -1,0 +1,88 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "team5DataFactorynew"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PLStreamingSouthridge')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DFStreamingSouthridge",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DFStreamingSouthridge2",
+								"type": "DataFlowReference"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/DFStreamingSouthridge2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DFStreamingSouthridge2')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SouthridgeStreaming2",
+								"type": "DatasetReference"
+							},
+							"name": "SouthridgeTransaction"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SouthridgeStreamingTable",
+								"type": "DatasetReference"
+							},
+							"name": "DFStreamingSouthridge"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumnStreaming"
+						}
+					],
+					"script": "source(output(\n\t\tTransactionID as string,\n\t\tCustomerID as string,\n\t\tMovieID as string,\n\t\tStreamStart as string,\n\t\tStreamEnd as string,\n\t\tCreatedDate as string,\n\t\tUpdatedDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeTransaction\nSouthridgeTransaction derive(SourceSystemID = 1,\n\t\tGlobalTransactionID = nextSequence()) ~> DerivedColumnStreaming\nDerivedColumnStreaming sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DFStreamingSouthridge"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
