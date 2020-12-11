@@ -3,10 +3,30 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
-			"sinks": [],
-			"transformations": [],
-			"script": ""
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SouthridgeStreaming2",
+						"type": "DatasetReference"
+					},
+					"name": "SouthridgeTransaction"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SouthridgeStreamingTable",
+						"type": "DatasetReference"
+					},
+					"name": "DFStreamingSouthridge"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumnStreaming"
+				}
+			],
+			"script": "source(output(\n\t\tTransactionID as string,\n\t\tCustomerID as string,\n\t\tMovieID as string,\n\t\tStreamStart as string,\n\t\tStreamEnd as string,\n\t\tCreatedDate as string,\n\t\tUpdatedDate as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SouthridgeTransaction\nSouthridgeTransaction derive(SourceSystemID = ERROR_FUNCTION(''),\n\t\tGlobalTransactionID = ERROR_FUNCTION('')) ~> DerivedColumnStreaming\nDerivedColumnStreaming sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DFStreamingSouthridge"
 		}
 	}
 }
