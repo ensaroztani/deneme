@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DFStreamingSouthridge2",
+						"referenceName": "DFStreamingSouthridge48",
 						"type": "DataFlowReference"
 					},
 					"compute": {
