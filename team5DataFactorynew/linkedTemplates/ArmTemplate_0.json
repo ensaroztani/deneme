@@ -159,7 +159,7 @@
 						"folderPath": "Fourth Coffee",
 						"container": "datalakecontainer"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -258,7 +258,7 @@
 						"folderPath": "Southridge/MoviesCosmosDb",
 						"container": "datalakecontainer"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -295,7 +295,7 @@
 						"folderPath": "VanArsdel",
 						"container": "datalakecontainer"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -494,7 +494,7 @@
 						"folderPath": "Southridge/StreaminTable",
 						"container": "datalakecontainer"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
