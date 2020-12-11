@@ -42,12 +42,6 @@
 						"tableOption": "autoCreate"
 					},
 					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "AzureBlobStorageteam5",
-							"type": "LinkedServiceReference"
-						}
-					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
