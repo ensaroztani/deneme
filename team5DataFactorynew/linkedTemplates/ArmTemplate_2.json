@@ -791,13 +791,7 @@
 								"type": "SqlDWSink",
 								"tableOption": "autoCreate"
 							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "AzureBlobStorageteam5",
-									"type": "LinkedServiceReference"
-								}
-							},
+							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [

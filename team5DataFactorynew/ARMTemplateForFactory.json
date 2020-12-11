@@ -105,13 +105,7 @@
 								"type": "SqlDWSink",
 								"tableOption": "autoCreate"
 							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "AzureBlobStorageteam5",
-									"type": "LinkedServiceReference"
-								}
-							},
+							"enableStaging": false,
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
@@ -297,8 +291,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_hel')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_hel')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageteam5')]"
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_hel')]"
 			]
 		},
 		{
