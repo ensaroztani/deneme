@@ -22,7 +22,7 @@
 				"folderPath": "Southridge/StreaminTable",
 				"container": "datalakecontainer"
 			},
-			"columnDelimiter": "|",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
