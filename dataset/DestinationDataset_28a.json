@@ -13,7 +13,7 @@
 				"folderPath": "Fourth Coffee",
 				"container": "datalakecontainer"
 			},
-			"columnDelimiter": "|",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
