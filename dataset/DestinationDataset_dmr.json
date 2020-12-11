@@ -13,7 +13,7 @@
 				"folderPath": "Southridge/MoviesCosmosDb",
 				"container": "datalakecontainer"
 			},
-			"columnDelimiter": "|",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
