@@ -3,31 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DFCustomers",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "DFCustomers",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "dataflow1",
+				"name": "DFRentals",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
