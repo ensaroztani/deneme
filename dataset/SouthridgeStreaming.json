@@ -1,0 +1,21 @@
+{
+	"name": "SouthridgeStreaming",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dboTransactions.csv",
+				"folderPath": "Southridge/StreaminTable",
+				"fileSystem": "datalakecontainer"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
