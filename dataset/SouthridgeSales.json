@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "SouthrideOrderOrderDetails",
-				"folderPath": "Global",
+				"folderPath": "Global/Southridge-SalesOrders",
 				"fileSystem": "datalakecontainer"
 			},
 			"columnDelimiter": ",",
