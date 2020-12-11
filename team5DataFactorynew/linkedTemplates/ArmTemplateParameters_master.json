@@ -20,6 +20,9 @@
 		"AzureSqlDatabaseStreaming_connectionString": {
 			"value": ""
 		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
 		"FileServerFourthCoffee_password": {
 			"value": ""
 		},
